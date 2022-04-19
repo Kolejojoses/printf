@@ -1,6 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-int ft_printf(const char *fmt, ...)
+int _printf(const char *format, ...);
 
 #endif
