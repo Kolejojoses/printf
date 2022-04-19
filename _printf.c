@@ -1,44 +1,32 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <string.h>
 
 int _printf(const char *format, ...)
 {
-	va_list vl;
-	int i = 0, j=0;
-		char buff[100]={0}, tmp[20];
-		va_start( vl, format); 
-		while (format && format[i])
+	const char *ptr;
+	unsigned int i;
+	char *str;
+
+	va_list arg;
+	va_start(arg, format);
+
+	for (ptr = format; *ptr != '\0'; ptr++)
+	{
+		while (*ptr != '%')
 		{
-		  	if(format[i] == '%')
-		  	{
- 		    i++;
- 		    switch (format[i]) 
- 		    {
-	 		    case 'c': 
-	 		    {
-	 		        buff[j] = (char)va_arg( vl, int);
-	 		        j++;
-	 		        break;
-	 		    }
-	 		    case 's': 
-	 		    {
-	 		        buff[j] = va_arg( vl, char *);
-	 		        j++;
-	 		        break;
-		        }
-        	}
-     	} 
-     	else 
-	    {
-	       	buff[j] =format[i];
-	       	j++;
-	    }
-	    i++;
-	} 
-    fwrite(buff, j, 1, stdout); 
-    va_end(vl);
-    return j;
- }
+			putchar(*ptr);
+			ptr++;
+		}
+		ptr++;
+		switch (*ptr)
+		{
+			case 'c': i = va_arg(arg, int);
+				return (putchar(i));
+				break;
+			case 's': str = va_arg(arg, char *);
+				return(puts(str));
+			default:
+				break;
+		}
+	}
+	va_end(arg);
+}
