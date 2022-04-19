@@ -19,23 +19,15 @@ int _printf(const char *format, ...)
  		    {
 	 		    case 'c': 
 	 		    {
-	 		        buff[j] = (char)va_arg( vl, int );
+	 		        buff[j] = (char)va_arg( vl, int);
 	 		        j++;
 	 		        break;
 	 		    }
-	 		    case 'd': 
+	 		    case 's': 
 	 		    {
-	 		        itoa(va_arg( vl, int ), tmp, 10);
-	 		        strcpy(&buff[j], tmp);
-	 		        j += strlen(tmp);
-		           break;
-		        }
-		        case 'x': 
-		        {
-		           itoa(va_arg( vl, int ), tmp, 16);
-		           strcpy(&buff[j], tmp);
-		           j += strlen(tmp);
-		           break;
+	 		        buff[j] = va_arg( vl, char *);
+	 		        j++;
+	 		        break;
 		        }
         	}
      	} 
